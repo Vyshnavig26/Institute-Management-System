@@ -1,4 +1,4 @@
-## Institute-Management-System
+# Institute-Management-System
 📖 Project Overview
 The Institute Management System is a comprehensive Salesforce-based solution designed to streamline educational institution operations by automating manual processes and providing integrated management of student data, course enrollment, attendance tracking, fee management, and academic performance monitoring.
 
