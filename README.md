@@ -1,1 +1,1 @@
-# SmartInstitute-CRM
+# Institute-Management-System
