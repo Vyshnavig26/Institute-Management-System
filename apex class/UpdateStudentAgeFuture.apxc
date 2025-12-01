@@ -1,0 +1,23 @@
+public class UpdateStudentAgeFuture {
+
+    @future
+    public static void updateAge(List<Id> studentIds) {
+
+        // Query students
+        List<Student__c> students = [
+            SELECT Id, Date_of_Birth__c, Age__c
+            FROM Student__c
+            WHERE Id IN :studentIds
+        ];
+
+        // Calculate Age
+        for(Student__c stu : students) {
+            if(stu.Date_of_Birth__c != null) {
+                stu.Age__c = StudentService.calculateAge(stu.Date_of_Birth__c);
+            }
+        }
+
+        // Update Records
+        update students;
+    }
+}
