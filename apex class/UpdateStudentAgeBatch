@@ -1,0 +1,26 @@
+public class UpdateStudentAgeBatch implements Database.Batchable<SObject> {
+
+    // Query which students to process
+    public Database.QueryLocator start(Database.BatchableContext bc) {
+        return Database.getQueryLocator(
+            'SELECT Id, Date_of_Birth__c, Age__c FROM Student__c'
+        );
+    }
+
+    // Executes on each batch (200 records)
+    public void execute(Database.BatchableContext bc, List<Student__c> scope) {
+        for(Student__c stu : scope) {
+            if(stu.Date_of_Birth__c != null) {
+                stu.Age__c = StudentService.calculateAge(stu.Date_of_Birth__c);
+            }
+        }
+
+        // Update processed batch
+        update scope;
+    }
+
+    // Runs after all batches complete
+    public void finish(Database.BatchableContext bc) {
+        System.debug('Student Age Batch Completed Successfully.');
+    }
+}
