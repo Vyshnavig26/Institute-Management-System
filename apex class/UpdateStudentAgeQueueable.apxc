@@ -1,0 +1,23 @@
+public class UpdateStudentAgeQueueable implements Queueable {
+
+    public void execute(QueueableContext context) {
+
+        // Query all student records
+        List<Student__c> students = [
+            SELECT Id, Date_of_Birth__c, Age__c
+            FROM Student__c
+        ];
+
+        // Process each student
+        for(Student__c stu : students) {
+            if(stu.Date_of_Birth__c != null) {
+                stu.Age__c = StudentService.calculateAge(stu.Date_of_Birth__c);
+            }
+        }
+
+        // Update students
+        update students;
+
+        System.debug('Queueable Job Completed Successfully.');
+    }
+}
