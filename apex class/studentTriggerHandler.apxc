@@ -1,0 +1,23 @@
+public class StudentTriggerHandler {
+
+    // Before Insert
+    public static void beforeInsert(List<Student__c> newList) {
+        for(Student__c stu : newList) {
+            if(stu.Date_of_Birth__c != null) {
+                stu.Age__c = StudentService.calculateAge(stu.Date_of_Birth__c);
+            }
+        }
+    }
+
+    // Before Update
+    public static void beforeUpdate(List<Student__c> newList, Map<Id, Student__c> oldMap) {
+        for(Student__c stu : newList) {
+            Student__c oldRecord = oldMap.get(stu.Id);
+
+            if(stu.Date_of_Birth__c != oldRecord.Date_of_Birth__c) {
+                stu.Age__c = StudentService.calculateAge(stu.Date_of_Birth__c);
+
+            }
+        }
+    }
+}
