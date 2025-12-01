@@ -1,0 +1,2 @@
+SELECT Name, Date_of_Birth__c, Age__c 
+FROM Student__c
