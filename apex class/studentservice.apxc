@@ -1,0 +1,17 @@
+public class StudentService {
+
+    // Calculate age from Date of Birth
+    public static Integer calculateAge(Date dob) {
+        if(dob == null) return null;
+        
+        Date today = Date.today();
+        Integer age = today.year() - dob.year();
+        
+        // If birthday hasn't occurred yet this year, subtract 1
+        if(today.month() < dob.month() || (today.month() == dob.month() && today.day() < dob.day())) {
+            age -= 1;
+        }
+        
+        return age;
+    }
+}
