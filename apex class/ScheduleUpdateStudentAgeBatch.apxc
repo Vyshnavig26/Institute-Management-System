@@ -1,0 +1,8 @@
+public class ScheduleUpdateStudentAgeBatch implements Schedulable {
+
+    public void execute(SchedulableContext sc) {
+        // Call your Batch Class
+        UpdateStudentAgeBatch b = new UpdateStudentAgeBatch();
+        Database.executeBatch(b, 200);
+    }
+}
